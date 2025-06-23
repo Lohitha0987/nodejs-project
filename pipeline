@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    environemt 
+    stages {
+        stage('build'){
+            steps{
+                sh "npm run build"
+            }
+        stage("unit_test"){
+            steps{
+                sh "npm test"
+            }
+        }
+        stage("deploy"){
+            steps{
+                sh "docker run -itd --name cont1 -p 1111:80 nodejs/app:v1"
+            }
+        }
+        
+        }
+
+    }
+}
