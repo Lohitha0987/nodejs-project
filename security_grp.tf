@@ -1,6 +1,6 @@
 resource "aws_security_group" "alb_sg" {
   name        = "alb-sg"
-  description = "Allow HTTP and HTTPS"
+  description = "Allow inbound traffic"
   vpc_id      = aws_vpc.main.id
 
   ingress {
