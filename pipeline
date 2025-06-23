@@ -10,6 +10,19 @@ pipeline {
                 sh "npm test"
             }
         }
+        stage("build Image"){
+            steps{
+                sh "docker build -t nodejs/app:v1 ."
+            }
+        }
+        stage("push image"){
+            steps{
+                docker.withRegistry('https://registry.hub.docker.com', 'git') {  
+                    sh "docker push "nodejs/app:v1"
+                }
+            }
+        }
+        
         stage("deploy"){
             steps{
                 sh "docker run -itd --name cont1 -p 1111:80 nodejs/app:v1"
